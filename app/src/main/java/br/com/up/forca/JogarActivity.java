@@ -10,10 +10,7 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
-import java.util.ArrayList;
-import java.util.Locale;
-
-//import br.com.up.forca.model.Palavra;
+import br.com.up.forca.models.Palavra;
 import br.com.up.forca.repositories.ForcaRepository;
 
 public class JogarActivity extends AppCompatActivity  {
@@ -56,18 +53,16 @@ public class JogarActivity extends AppCompatActivity  {
     private void carregarPalavraSorteada() {
 
         palavraEscolhida = "CARRO";
-      //  String nome = inputTextNomeJogador.getText().toString();
 
         for(int i = 0; i < palavraEscolhida.length(); i++) {
             palavraSecreta += "_";
         }
 
-       // Palavra palavra = new Palavra(
-       //         nome,
-       //         palavraEscolhida,
-        //        tentativas);
+        Palavra palavra = new Palavra(
+                palavraEscolhida,
+                tentativas);
 
-       // ForcaRepository.getInstance().salvarPalavraMascarada(palavra);
+       ForcaRepository.getInstance().salvarPalavraMascarada(palavra);
 
         textoVisual.setText(palavraSecreta);
 

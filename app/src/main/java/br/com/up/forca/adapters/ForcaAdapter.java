@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import br.com.up.forca.R;
-/*import br.com.up.forca.model.Palavra;
+import br.com.up.forca.models.Palavra;
 
 public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHolder> {
 
@@ -52,9 +52,9 @@ public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHol
             TextView textViewTentativas =
                     holder.itemView.findViewById(R.id.textViewTentativas);
 
-            textViewNomeJogador.setText(palavra.getNomeJogador());
+            //textViewNomeJogador.setText(palavra.getNomeJogador());
             textViewPalavraEscolhida.setText(palavra.getPalavraEscolhida());
-            textViewTentativas.setText(palavra.getTentativas());
+         //   textViewTentativas.setText(palavra.getTentativas());
         }
 
         @Override
@@ -70,4 +70,4 @@ public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHol
             }
         }
     }
-*/
+
