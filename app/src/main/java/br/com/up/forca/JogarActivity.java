@@ -33,13 +33,13 @@ public class JogarActivity extends AppCompatActivity  {
         setContentView(R.layout.activity_play);
 
 
-       textoVisual = findViewById(R.id.textViewPalavra);
+        textoVisual = findViewById(R.id.textViewPalavra);
         buttonAdicionarLetra = findViewById(R.id.buttonAddLetra);
         inputLayoutLetra = findViewById(R.id.inputLayoutLetra);
         inputTextLetra = findViewById(R.id.inputTextLetra);
 
 
-        //carregarPalavraSorteada();
+        carregarPalavraSorteada();
 
         buttonAdicionarLetra.setOnClickListener(
                 new View.OnClickListener() {
@@ -54,7 +54,7 @@ public class JogarActivity extends AppCompatActivity  {
     private void carregarPalavraSorteada() {
 
         palavraEscolhida = "CARRO";
-        String nome = inputTextNomeJogador.getText().toString();
+      //  String nome = inputTextNomeJogador.getText().toString();
 
         for(int i = 0; i < palavraEscolhida.length(); i++) {
             palavraSecreta += "_";

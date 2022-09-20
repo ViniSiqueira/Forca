@@ -25,12 +25,12 @@ public class MainActivity extends AppCompatActivity {
         buttonJogar = findViewById(R.id.buttonPlay);
         inputTextNomeJogador = findViewById(R.id.inputTextNome);
 
-        recyclerViewPalavras.setLayoutManager(
-                // new GridLayoutManager(this,10)
+     /*   recyclerViewPalavras.setLayoutManager(
+              //   new GridLayoutManager(this,10)
                 new LinearLayoutManager(this,
                         RecyclerView.VERTICAL,
                         false)
-        );
+        );*/
 
        buttonJogar.setOnClickListener(new View.OnClickListener() {
             @Override

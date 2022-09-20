@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 import br.com.up.forca.R;
-import br.com.up.forca.model.Palavra;
+/*import br.com.up.forca.model.Palavra;
 
 public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHolder> {
 
@@ -70,4 +70,4 @@ public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHol
             }
         }
     }
-
+*/
