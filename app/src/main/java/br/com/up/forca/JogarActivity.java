@@ -11,6 +11,7 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
 import java.util.ArrayList;
+import java.util.Locale;
 
 //import br.com.up.forca.model.Palavra;
 import br.com.up.forca.repositories.ForcaRepository;
@@ -26,6 +27,7 @@ public class JogarActivity extends AppCompatActivity  {
     String palavraEscolhida = "";
     String palavraSecreta = "";
     String letrasUsadas = "";
+    int tentativas = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,7 +64,8 @@ public class JogarActivity extends AppCompatActivity  {
 
        // Palavra palavra = new Palavra(
        //         nome,
-       //         palavraEscolhida);
+       //         palavraEscolhida,
+        //        tentativas);
 
        // ForcaRepository.getInstance().salvarPalavraMascarada(palavra);
 
@@ -70,10 +73,10 @@ public class JogarActivity extends AppCompatActivity  {
 
     }
 
-    private void adicionarLetra(){
+    private void adicionarLetra() {
 
-        int tentativas = 10;
         String letras = inputTextLetra.getText().toString();
+        letras = letras.toUpperCase();
 
         if(letras.isEmpty()){
             inputLayoutLetra.setError("Atenção! Insira uma letra");
@@ -81,38 +84,48 @@ public class JogarActivity extends AppCompatActivity  {
         }
 
         if(letras.length() > 1){
+            inputTextLetra.setText("");
             inputLayoutLetra.setError("Atenção! Só pode ser inserido uma letra por vez");
             return;
         }
 
 
         if (letrasUsadas.indexOf(letras) >= 0) {
+            inputTextLetra.setText("");
             inputLayoutLetra.setError("Atenção! Você já tentou utilizar essa letra");
             return;
         }
 
         letrasUsadas += letras;
+        palavraSecreta = "";
 
-        if (palavraEscolhida.indexOf(letras) >= 0){
-            for(int i = 0; i < palavraEscolhida.length(); i++) {
-                if (letrasUsadas.indexOf(palavraEscolhida.charAt(i)) >= 0) {
-                    palavraSecreta += palavraEscolhida.charAt(i);
-                } else {
-                    palavraSecreta += "_";
+        if (tentativas > 0) {
+            if (palavraEscolhida.indexOf(letras) >= 0) {
+                for (int i = 0; i < palavraEscolhida.length(); i++) {
+                    if (letrasUsadas.indexOf(palavraEscolhida.charAt(i)) >= 0) {
+                        palavraSecreta += palavraEscolhida.charAt(i);
+                    } else {
+                        palavraSecreta += "_";
+                    }
                 }
+            } else {
+                inputLayoutLetra.setError("Atenção! Não existe essa letra na palavra secreta");
+                tentativas -= 1;
+                return;
+            }
+
+            if (!palavraSecreta.contains("_")) {
+                //ganhou
             }
         } else {
-            inputLayoutLetra.setError("Atenção! Não existe essa letra na palavra secreta");
-            tentativas -= tentativas;
+            inputLayoutLetra.setError("Atenção! Você perdeu!");
+            //colocar timer;
+            onBackPressed();
             return;
         }
 
-
-        if (!palavraSecreta.contains("_")) {
-            //ganhou
-        }
-
-
+        textoVisual.setText(palavraSecreta);
+        inputTextLetra.setText("");
     }
 
 }
