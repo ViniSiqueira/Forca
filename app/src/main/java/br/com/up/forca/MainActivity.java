@@ -71,8 +71,10 @@ public class MainActivity extends AppCompatActivity {
 
         if(palavras.size() > 0){
             textNomeJogo.setVisibility(View.INVISIBLE);
+            inputTextNomeJogador.setVisibility(View.INVISIBLE);
         }else{
             textNomeJogo.setVisibility(View.VISIBLE);
+            inputTextNomeJogador.setVisibility(View.VISIBLE);
         }
 
         recyclerViewPalavras.setAdapter(

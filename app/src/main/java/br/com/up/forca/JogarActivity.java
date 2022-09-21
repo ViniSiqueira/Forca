@@ -10,12 +10,16 @@ import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.android.material.textfield.TextInputLayout;
 
+import java.util.Random;
+
 import br.com.up.forca.models.Palavra;
 import br.com.up.forca.repositories.ForcaRepository;
 
 public class JogarActivity extends AppCompatActivity  {
 
     private TextView textoVisual;
+    private TextView textoValidacao;
+    private TextView textViewNumTentativas;
     private FloatingActionButton buttonAdicionarLetra;
     private TextInputLayout inputLayoutLetra;
     private TextInputEditText inputTextLetra;
@@ -36,36 +40,55 @@ public class JogarActivity extends AppCompatActivity  {
         buttonAdicionarLetra = findViewById(R.id.buttonAddLetra);
         inputLayoutLetra = findViewById(R.id.inputLayoutLetra);
         inputTextLetra = findViewById(R.id.inputTextLetra);
-
+        textoValidacao = findViewById(R.id.textViewValidacao);
+        textViewNumTentativas= findViewById(R.id.textViewNumTentativas);
 
         carregarPalavraSorteada();
+        carregarPalavraSecreta();
+
+        textoVisual.setText(palavraSecreta);
+        textViewNumTentativas.setText(Integer.toString(tentativas));
 
         buttonAdicionarLetra.setOnClickListener(
                 new View.OnClickListener() {
                     @Override
                     public void onClick(View view) {
-                        adicionarLetra();
+                        try {
+                            adicionarLetra();
+                        } catch (InterruptedException e) {
+                            e.printStackTrace();
+                        }
                     }
                 });
-
     }
 
     private void carregarPalavraSorteada() {
 
-        palavraEscolhida = "CARRO";
+        Random aleatorio = new Random();
+
+        String[] bancoPalavras = {"CARRO",
+                "AVIAO",
+                "BARCO"};
+
+        int idx = aleatorio.nextInt(bancoPalavras.length);
+        palavraEscolhida= (bancoPalavras[idx]);
+
+    }
+
+    private void carregarPalavraSecreta() {
 
         for(int i = 0; i < palavraEscolhida.length(); i++) {
             palavraSecreta += "_";
         }
 
-        textoVisual.setText(palavraSecreta);
-
     }
 
-    private void adicionarLetra() {
+    private void adicionarLetra() throws InterruptedException {
 
         String letras = inputTextLetra.getText().toString();
         letras = letras.toUpperCase();
+
+        inputTextLetra.getText().clear();
 
         if(letras.isEmpty()){
             inputLayoutLetra.setError("Atenção! Insira uma letra");
@@ -73,13 +96,11 @@ public class JogarActivity extends AppCompatActivity  {
         }
 
         if(letras.length() > 1){
-            inputTextLetra.getText().clear();
             inputLayoutLetra.setError("Atenção! Só pode ser inserido uma letra por vez");
             return;
         }
 
         if (letrasUsadas.indexOf(letras) >= 0) {
-            inputTextLetra.getText().clear();
             inputLayoutLetra.setError("Atenção! Você já tentou utilizar essa letra");
             return;
         }
@@ -99,27 +120,33 @@ public class JogarActivity extends AppCompatActivity  {
             } else {
                 inputLayoutLetra.setError("Atenção! Não existe essa letra na palavra secreta");
                 tentativas -= 1;
+                textViewNumTentativas.setText(Integer.toString(tentativas));
                 return;
             }
 
+            inputLayoutLetra.setError("");
+            textoVisual.setText(palavraSecreta);
+
             if (!palavraSecreta.contains("_")) {
+
+                textoValidacao.setText("Atenção! Você ganhou!");
+
                 Palavra palavra = new Palavra(
                         palavraEscolhida,
                         tentativas);
 
                 ForcaRepository.getInstance().save(palavra);
 
-                onBackPressed();
+               // onBackPressed();
+
             }
         } else {
-            inputLayoutLetra.setError("Atenção! Você perdeu!");
-            //colocar timer;
+            textoValidacao.setText("Atenção! Você perdeu!");
+            Thread.sleep(10000);
+
             onBackPressed();
-            return;
         }
 
-        textoVisual.setText(palavraSecreta);
-        inputTextLetra.getText().clear();
     }
 
 }
