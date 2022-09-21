@@ -58,12 +58,6 @@ public class JogarActivity extends AppCompatActivity  {
             palavraSecreta += "_";
         }
 
-        Palavra palavra = new Palavra(
-                palavraEscolhida,
-                tentativas);
-
-       ForcaRepository.getInstance().salvarPalavraMascarada(palavra);
-
         textoVisual.setText(palavraSecreta);
 
     }
@@ -79,14 +73,13 @@ public class JogarActivity extends AppCompatActivity  {
         }
 
         if(letras.length() > 1){
-            inputTextLetra.setText("");
+            inputTextLetra.getText().clear();
             inputLayoutLetra.setError("Atenção! Só pode ser inserido uma letra por vez");
             return;
         }
 
-
         if (letrasUsadas.indexOf(letras) >= 0) {
-            inputTextLetra.setText("");
+            inputTextLetra.getText().clear();
             inputLayoutLetra.setError("Atenção! Você já tentou utilizar essa letra");
             return;
         }
@@ -110,7 +103,13 @@ public class JogarActivity extends AppCompatActivity  {
             }
 
             if (!palavraSecreta.contains("_")) {
-                //ganhou
+                Palavra palavra = new Palavra(
+                        palavraEscolhida,
+                        tentativas);
+
+                ForcaRepository.getInstance().save(palavra);
+
+                onBackPressed();
             }
         } else {
             inputLayoutLetra.setError("Atenção! Você perdeu!");
@@ -120,7 +119,7 @@ public class JogarActivity extends AppCompatActivity  {
         }
 
         textoVisual.setText(palavraSecreta);
-        inputTextLetra.setText("");
+        inputTextLetra.getText().clear();
     }
 
 }

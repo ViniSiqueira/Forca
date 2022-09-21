@@ -24,10 +24,6 @@ public class ForcaRepository {
         palavraSecreta.add(palavra);
     }
 
-    public void salvarPalavraMascarada(Palavra palavra){
-        palavraSecreta.add(palavra);
-    }
-
     public void delete(Palavra palavra){
         palavraSecreta.remove(palavra);
     }

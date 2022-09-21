@@ -7,15 +7,23 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.TextView;
+
+import br.com.up.forca.adapters.ForcaAdapter;
 import br.com.up.forca.models.Palavra;
+import br.com.up.forca.repositories.ForcaRepository;
+
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.textfield.TextInputEditText;
+
+import java.util.ArrayList;
 
 public class MainActivity extends AppCompatActivity {
 
     private FloatingActionButton buttonJogar;
     private TextInputEditText inputTextNomeJogador;
     private RecyclerView recyclerViewPalavras;
+    private TextView textNomeJogo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -24,13 +32,15 @@ public class MainActivity extends AppCompatActivity {
 
         buttonJogar = findViewById(R.id.buttonPlay);
         inputTextNomeJogador = findViewById(R.id.inputTextNome);
+        recyclerViewPalavras = findViewById(R.id.recyclerForca);
+        textNomeJogo = findViewById(R.id.textViewNomeJogo);
 
-     /*   recyclerViewPalavras.setLayoutManager(
+        recyclerViewPalavras.setLayoutManager(
               //   new GridLayoutManager(this,10)
                 new LinearLayoutManager(this,
                         RecyclerView.VERTICAL,
                         false)
-        );*/
+        );
 
        buttonJogar.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +60,24 @@ public class MainActivity extends AppCompatActivity {
                 startActivity(intent);
             }
         });
+
+    }
+
+    @Override
+    protected void onResume() {
+        super.onResume();
+        ArrayList<Palavra> palavras =
+                ForcaRepository.getInstance().getAll();
+
+        if(palavras.size() > 0){
+            textNomeJogo.setVisibility(View.INVISIBLE);
+        }else{
+            textNomeJogo.setVisibility(View.VISIBLE);
+        }
+
+        recyclerViewPalavras.setAdapter(
+                new ForcaAdapter(palavras)
+        );
 
     }
 }

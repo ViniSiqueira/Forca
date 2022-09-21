@@ -14,10 +14,10 @@ import br.com.up.forca.models.Palavra;
 
 public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHolder> {
 
-        private ArrayList<Palavra> palavras;
+      private ArrayList<Palavra> palavras;
 
     public ForcaAdapter(ArrayList<Palavra> palavras){
-            this.palavras = palavras;
+           this.palavras = palavras;
         }
 
         @NonNull
@@ -52,9 +52,9 @@ public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHol
             TextView textViewTentativas =
                     holder.itemView.findViewById(R.id.textViewTentativas);
 
-            //textViewNomeJogador.setText(palavra.getNomeJogador());
+           // textViewNomeJogador.setText(palavra.getNomeJogador());
             textViewPalavraEscolhida.setText(palavra.getPalavraEscolhida());
-         //   textViewTentativas.setText(palavra.getTentativas());
+            textViewTentativas.setText(palavra.getTentativas());
         }
 
         @Override
