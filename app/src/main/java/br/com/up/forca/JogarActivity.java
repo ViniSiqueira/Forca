@@ -20,7 +20,6 @@ import br.com.up.forca.repositories.ForcaRepository;
 public class JogarActivity extends AppCompatActivity  {
 
     private TextView textoVisual;
-    private TextView textoValidacao;
     private TextView textViewNumTentativas;
     private FloatingActionButton buttonAdicionarLetra;
     private TextInputLayout inputLayoutLetra;
@@ -44,7 +43,6 @@ public class JogarActivity extends AppCompatActivity  {
         buttonAdicionarLetra = findViewById(R.id.buttonAddLetra);
         inputLayoutLetra = findViewById(R.id.inputLayoutLetra);
         inputTextLetra = findViewById(R.id.inputTextLetra);
-        textoValidacao = findViewById(R.id.textViewValidacao);
         textViewNumTentativas= findViewById(R.id.textViewNumTentativas);
 
         carregarPalavraSorteada();
@@ -93,7 +91,6 @@ public class JogarActivity extends AppCompatActivity  {
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
-        palavraEscolhida = "CARRO";
 
     }
 
@@ -156,7 +153,6 @@ public class JogarActivity extends AppCompatActivity  {
                 new Handler().postDelayed(new Runnable() {
                     @Override
                     public void run() {
-                        onBackPressed();
                     }
                 },4000);
 
