@@ -87,7 +87,9 @@ public class JogarActivity extends AppCompatActivity  {
                 "FABIO",
                 "ANDROID",
                 "STUDIO",
-                "JAVA"};
+                "JAVA",
+                "POSITIVO",
+                "UNIVERSIDADE"};
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
@@ -149,7 +151,14 @@ public class JogarActivity extends AppCompatActivity  {
 
             if (!palavraSecreta.contains("_")) {
 
-                textoValidacao.setText("Atenção! Você ganhou!");
+                Toast.makeText(this,"Atenção! Você Ganhou!!!!!", Toast.LENGTH_SHORT).show();
+
+                new Handler().postDelayed(new Runnable() {
+                    @Override
+                    public void run() {
+                        onBackPressed();
+                    }
+                },4000);
 
                 Palavra palavra = new Palavra(
                         nomeJogador,
