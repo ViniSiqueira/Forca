@@ -56,7 +56,9 @@ public class MainActivity extends AppCompatActivity {
                 Intent intent = new Intent(
                         getApplicationContext(),
                         JogarActivity.class
+
                 );
+              intent.putExtra("nomeJogador",nome);
                 startActivity(intent);
             }
         });

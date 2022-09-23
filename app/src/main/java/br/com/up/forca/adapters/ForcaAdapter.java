@@ -52,9 +52,9 @@ public class ForcaAdapter extends RecyclerView.Adapter<ForcaAdapter.ForcaViewHol
             TextView textViewTentativas =
                     holder.itemView.findViewById(R.id.textViewTentativas);
 
-           // textViewNomeJogador.setText(palavra.getNomeJogador());
+            textViewNomeJogador.setText(palavra.getNomeJogador());
             textViewPalavraEscolhida.setText(palavra.getPalavraEscolhida());
-            textViewTentativas.setText(palavra.getTentativas());
+            textViewTentativas.setText(Integer.toString(palavra.getTentativas()));
         }
 
         @Override

@@ -1,8 +1,10 @@
 package br.com.up.forca;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -28,12 +30,14 @@ public class JogarActivity extends AppCompatActivity  {
     String palavraEscolhida = "";
     String palavraSecreta = "";
     String letrasUsadas = "";
+    String nomeJogador = "";
     int tentativas = 10;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_play);
+        nomeJogador = getIntent().getStringExtra("nomeJogador");
 
 
         textoVisual = findViewById(R.id.textViewPalavra);
@@ -68,7 +72,22 @@ public class JogarActivity extends AppCompatActivity  {
 
         String[] bancoPalavras = {"CARRO",
                 "AVIAO",
-                "BARCO"};
+                "BARCO",
+                "JETTA",
+                "CIVIC",
+                "PRISMA",
+                "UNO",
+                "PRYSZIADA",
+                "PALMAS",
+                "ESCOBAR",
+                "JEAN",
+                "VINICIUS"
+                "ANA",
+                "GABRIEL",
+                "FABIO",
+                "ANDROID",
+                "STUDIO",
+                "JAVA"};
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
@@ -132,19 +151,25 @@ public class JogarActivity extends AppCompatActivity  {
                 textoValidacao.setText("Atenção! Você ganhou!");
 
                 Palavra palavra = new Palavra(
+                        nomeJogador,
                         palavraEscolhida,
                         tentativas);
 
                 ForcaRepository.getInstance().save(palavra);
 
-               // onBackPressed();
+                onBackPressed();
 
             }
         } else {
-            textoValidacao.setText("Atenção! Você perdeu!");
-            Thread.sleep(10000);
+            Toast.makeText(this,"Atenção! Você perdeu!", Toast.LENGTH_SHORT).show();
 
-            onBackPressed();
+            new Handler().postDelayed(new Runnable() {
+                @Override
+                public void run() {
+                    onBackPressed();
+                }
+            },4000);
+
         }
 
     }
