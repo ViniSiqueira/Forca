@@ -81,7 +81,7 @@ public class JogarActivity extends AppCompatActivity  {
                 "PALMAS",
                 "ESCOBAR",
                 "JEAN",
-                "VINICIUS"
+                "VINICIUS",
                 "ANA",
                 "GABRIEL",
                 "FABIO",
@@ -91,6 +91,7 @@ public class JogarActivity extends AppCompatActivity  {
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
+        palavraEscolhida = "CARRO";
 
     }
 
