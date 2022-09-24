@@ -21,6 +21,7 @@ public class JogarActivity extends AppCompatActivity  {
 
     private TextView textoVisual;
     private TextView textViewNumTentativas;
+    private TextView textViewLetras;
     private FloatingActionButton buttonAdicionarLetra;
     private TextInputLayout inputLayoutLetra;
     private TextInputEditText inputTextLetra;
@@ -30,6 +31,7 @@ public class JogarActivity extends AppCompatActivity  {
     String palavraSecreta = "";
     String letrasUsadas = "";
     String nomeJogador = "";
+    String letra = "";
     int tentativas = 10;
 
     @Override
@@ -44,6 +46,7 @@ public class JogarActivity extends AppCompatActivity  {
         inputLayoutLetra = findViewById(R.id.inputLayoutLetra);
         inputTextLetra = findViewById(R.id.inputTextLetra);
         textViewNumTentativas= findViewById(R.id.textViewNumTentativas);
+        textViewLetras = findViewById(R.id.textViewLetras);
 
         carregarPalavraSorteada();
         carregarPalavraSecreta();
@@ -91,6 +94,7 @@ public class JogarActivity extends AppCompatActivity  {
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
+        palavraEscolhida = "CARRO";
 
     }
 
@@ -124,8 +128,12 @@ public class JogarActivity extends AppCompatActivity  {
             return;
         }
 
+        letra += letras + ", ";
+
         letrasUsadas += letras;
         palavraSecreta = "";
+
+        textViewLetras.setText(letra);
 
         if (tentativas > 0) {
             if (palavraEscolhida.indexOf(letras) >= 0) {
