@@ -94,7 +94,6 @@ public class JogarActivity extends AppCompatActivity  {
 
         int idx = aleatorio.nextInt(bancoPalavras.length);
         palavraEscolhida= (bancoPalavras[idx]);
-        palavraEscolhida = "CARRO";
 
     }
 
